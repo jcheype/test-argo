@@ -1,3 +1,4 @@
-FROM nginx
-COPY README.md /usr/share/nginx/html
-COPY index.html /usr/share/nginx/html
+FROM node:24
+COPY dist/server.cjs /
+EXPOSE 3100
+ENTRYPOINT [ "node", "server.cjs" ]
