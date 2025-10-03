@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: guestbook-ui
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: test-jc-app
+  template:
+    metadata:
+      labels:
+        app: test-jc-app
+    spec:
+      containers:
+        - image: registry.home.jcheype.com/test-nginx
+          name: test-jc
+          ports:
+            - containerPort: 80
