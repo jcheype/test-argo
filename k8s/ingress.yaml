@@ -4,6 +4,8 @@ metadata:
   name: test-jc-ingress
   namespace: testjc
   annotations:
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/frontend-entry-points: http
     traefik.ingress.kubernetes.io/router.middlewares: default-httpredirect@kubernetescrd
 spec:
   rules:
