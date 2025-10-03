@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: test-jc-ingress
   namespace: testjc
+  annotations:
+    traefik.ingress.kubernetes.io/router.middlewares: default-httpredirect@kubernetescrd
 spec:
   rules:
     - host: test.lab.jcheype.com
