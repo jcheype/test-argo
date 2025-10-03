@@ -14,7 +14,7 @@ spec:
         app: test-jc
     spec:
       containers:
-        - image: registry.home.jcheype.com/test-nginx
+        - image: registry.home.jcheype.com/test-app:74bf5d41a3a161528ec3b39bbc1eeac5704261f5
           imagePullPolicy: Always
           name: test-jc
           ports:
