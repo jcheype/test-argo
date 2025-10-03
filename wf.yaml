@@ -1,0 +1,53 @@
+metadata:
+  name: demo
+  namespace: testjc
+  labels:
+    example: "true"
+spec:
+  arguments:
+    parameters:
+      - name: branch
+        value: main
+      - name: repo
+        value: https://github.com/jcheype/test-argo.git
+  entrypoint: main
+  templates:
+    - name: main
+      steps:
+        - - name: checkout
+            template: checkout
+        - - name: build
+            template: build
+    - name: checkout
+      script:
+        image: node:24
+        workingDir: /mnt
+        args:
+          - sh
+        # use --depth 1 and --single-branch for fastest possible checkout
+        source: git clone --depth 1 --single-branch --branch {{workflow.parameters.branch}} {{workflow.parameters.repo}} .
+        volumeMounts:
+          - mountPath: /mnt
+            name: work
+    - name: build
+      script:
+        image: node:24
+        workingDir: /work
+        args:
+          - sh
+        source: yarn install && yarn build
+        volumeMounts:
+          - mountPath: /work
+            name: work
+
+  volumeClaimTemplates:
+    # A shared work volume.
+    - name: work
+      metadata:
+        name: work
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 256Mi
+
