@@ -7,7 +7,8 @@ metadata:
     traefik.ingress.kubernetes.io/router.middlewares: default-httpredirect@kubernetescrd
 spec:
   rules:
-    - http:
+    - host: test.lab.jcheype.com
+      http:
         paths:
           - backend:
               service:
