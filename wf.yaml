@@ -37,7 +37,7 @@ spec:
         workingDir: /work
         args:
           - sh
-        source: yarn install && yarn build && ls
+        source: yarn install && yarn build
         volumeMounts:
           - mountPath: /work
             name: work
@@ -46,8 +46,13 @@ spec:
         image: gcr.io/kaniko-project/executor:latest
         workingDir: /work
         args:
-          - sh
-        source: /kaniko/executor --dockerfile Dockerfile --destination registry.home.jcheype.com/test-app
+          - --dockerfile
+          - Dockerfile
+          - --destination
+          - registry.home.jcheype.com/test-app
+        volumeMounts:
+          - mountPath: /work
+            name: work
   volumeClaimTemplates:
     # A shared work volume.
     - name: work
