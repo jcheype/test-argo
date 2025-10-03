@@ -8,7 +8,7 @@ metadata:
 spec:
   rules:
     - host: test.lab.jcheype.com
-      http:
+      https:
         paths:
           - backend:
               service:
