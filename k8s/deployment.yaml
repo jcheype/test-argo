@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test-jc-app
+  name: test-jc
 spec:
   replicas: 1
   revisionHistoryLimit: 3
   selector:
     matchLabels:
-      app: test-jc-app
+      app: test-jc
   template:
     metadata:
       labels:
-        app: test-jc-app
+        app: test-jc
     spec:
       containers:
         - image: registry.home.jcheype.com/test-nginx
