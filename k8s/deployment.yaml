@@ -15,6 +15,7 @@ spec:
     spec:
       containers:
         - image: registry.home.jcheype.com/test-nginx
+          imagePullPolicy: Always
           name: test-jc
           ports:
             - containerPort: 80
